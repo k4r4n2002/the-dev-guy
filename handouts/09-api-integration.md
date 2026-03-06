@@ -168,4 +168,43 @@ const base = import.meta.env.VITE_API_BASE_URL;
 
 ---
 
+## ⚠️ Dev vs Production: The Vite Proxy
+
+This trips up almost every beginner, so read this carefully.
+
+In development, your Axios client sends requests to `http://localhost:5000/api`. But when you open DevTools → Network, you'll see requests going to **`http://localhost:5173/api`** — the same port as the frontend!
+
+**Why?** Because Vite's dev server acts as a proxy. Look at `vite.config.js`:
+
+```js
+server: {
+  proxy: {
+    '/api': {
+      target: 'http://localhost:5000',  // forward to the Express backend
+      changeOrigin: true,
+    },
+  },
+},
+```
+
+Any request to `localhost:5173/api/*` is silently forwarded by Vite to `localhost:5000/api/*`. The browser never makes a cross-origin request, so **CORS is not involved at all in development**.
+
+```
+Browser → localhost:5173/api/posts  (same origin, no CORS)
+              ↓
+         Vite dev server proxies to:
+              ↓
+         localhost:5000/api/posts    (Node.js/Express)
+```
+
+**In production**, the frontend is served from nginx on port 80 and the backend lives on a different server or pod. Now they ARE different origins, so the `cors()` middleware in `app.js` becomes critical.
+
+**The rule of thumb:**
+- CORS config in `app.js` → matters in production
+- Vite proxy in `vite.config.js` → only relevant in development
+
+This is also why `VITE_API_BASE_URL` in the dev `.env` is set to `http://localhost:5000/api` but the Vite config proxy intercepts it before it ever leaves the browser.
+
+---
+
 **Next → [10-docker.md](./10-docker.md)**

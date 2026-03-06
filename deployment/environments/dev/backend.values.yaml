@@ -29,6 +29,13 @@ resources:
     cpu: "500m"
     memory: "512Mi"
 
+# IMPORTANT: these must be true so the ConfigMap and Secret templates
+# render and the env vars are actually injected into the container.
+# The defaults in values.yaml are also true, but always set explicitly
+# in environment-specific values to make the contract clear.
+envFromConfig: true
+envFromSecret: true
+
 # Non-sensitive configuration (mounted via ConfigMap)
 configData:
   NODE_ENV: "development"

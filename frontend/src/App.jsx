@@ -5,7 +5,7 @@
  *
  * Sets up React Router v6 routes:
  * - Public routes: /, /login, /register, /posts/:id
- * - Protected routes (require auth): /create, /profile
+ * - Protected routes (require auth): /create, /profile, /posts/:id/edit
  *
  * The <AuthProvider> wraps the entire app so any component can call useAuth().
  */
@@ -25,6 +25,7 @@ import LoginPage from './pages/LoginPage';
 import RegisterPage from './pages/RegisterPage';
 import PostDetailPage from './pages/PostDetailPage';
 import CreatePostPage from './pages/CreatePostPage';
+import EditPostPage from './pages/EditPostPage';
 import ProfilePage from './pages/ProfilePage';
 
 function AppContent() {
@@ -47,6 +48,7 @@ function AppContent() {
                 {/* Protected routes — wrapped in <ProtectedRoute> */}
                 <Route element={<ProtectedRoute />}>
                     <Route path="/create" element={<CreatePostPage />} />
+                    <Route path="/posts/:id/edit" element={<EditPostPage />} />
                     <Route path="/profile" element={<ProfilePage />} />
                 </Route>
 

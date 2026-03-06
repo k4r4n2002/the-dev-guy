@@ -32,10 +32,11 @@ Follow the handouts in order. Each one references actual files in `backend/` and
 | 06 | React Fundamentals | JSX, props, state |
 | 07 | React Hooks | All 8 built-in + custom hooks |
 | 08 | React Advanced | Context, reducers, Error Boundaries |
-| 09 | API Integration | Axios, interceptors, async patterns |
+| 09 | API Integration | Axios, interceptors, Vite proxy |
 | 10 | Docker | Containerizing Node + React |
 | 11 | K3s Deployment | Helm, k3s, deploy scripts |
 | 12 | MongoDB Atlas Setup | Cloud DB from scratch |
+| 13 | Testing | Jest, Supertest, Vitest, RTL |
 
 ## Setup (Do This First)
 

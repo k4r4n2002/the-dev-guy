@@ -2,7 +2,7 @@
  * pages/FeedPage.jsx — Main Post Feed
  *
  * HOOKS USED: useState, useEffect, useMemo, useCallback, usePagination,
- *             useFetch, useDebounce, useIntersectionObserver
+ *             useDebounce, useLocalStorage
  *
  * This page is the main demo of data fetching patterns:
  * - Paginated list with search
@@ -15,6 +15,7 @@ import { useState, useEffect, useMemo, useCallback } from 'react';
 import { postsApi } from '../api/client';
 import PostCard from '../components/PostCard';
 import { useDebounce } from '../hooks/useDebounce';
+import { useLocalStorage } from '../hooks/useLocalStorage';
 import { usePagination } from '../hooks/usePagination';
 import './FeedPage.css';
 
@@ -23,7 +24,10 @@ export default function FeedPage() {
     const [total, setTotal] = useState(0);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
-    const [search, setSearch] = useState('');
+    // useLocalStorage: search term persists across page refreshes.
+    // Try it: type a search, refresh the page — the term is still there!
+    // This is why useLocalStorage is more useful than useState for this case.
+    const [search, setSearch] = useLocalStorage('devlog_feed_search', '');
 
     const debouncedSearch = useDebounce(search, 500);
     const { page, totalPages, pageNumbers, goTo, hasPrev, hasNext, prev, next, reset } =
