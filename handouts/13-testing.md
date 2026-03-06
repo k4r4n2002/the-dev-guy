@@ -319,6 +319,6 @@ cd frontend && npm test
 
 ---
 
-**You've completed the full Dev Guy course! 🎉**
+**You're all set there**
 
 Review the concepts by re-reading any handout, then try extending the app: add post categories, image upload, notification system, or a follower/following feature.

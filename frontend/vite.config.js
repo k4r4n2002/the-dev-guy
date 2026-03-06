@@ -16,6 +16,18 @@ export default defineConfig({
     },
     build: {
         outDir: 'dist',
-        sourcemap: false, // disable in production for smaller bundle
+        sourcemap: false,
+    },
+    test: {
+        // Vitest config lives here alongside Vite config
+        environment: 'jsdom',          // simulate a browser DOM
+        globals: true,                 // vi, describe, it, expect available without importing
+        setupFiles: './src/test-setup.js',
+        coverage: {
+            provider: 'v8',
+            reporter: ['text', 'html'],
+            include: ['src/**/*.{js,jsx}'],
+            exclude: ['src/main.jsx', 'src/**/__tests__/**'],
+        },
     },
 });
