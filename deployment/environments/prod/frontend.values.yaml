@@ -1,0 +1,34 @@
+# =============================================================================
+# environments/prod/frontend.values.yaml
+# =============================================================================
+
+service:
+  name: "tdg-frontend"
+  image: "karandh/devlog-frontend:latest"
+  replicas: 2
+  port: 80
+  type: ClusterIP
+
+ingress:
+  enabled: true
+  host: "devlog.local"
+  className: "traefik"
+
+hpa:
+  enabled: true
+  minReplicas: 2
+  maxReplicas: 5
+  cpuThreshold: 60
+
+resources:
+  requests:
+    cpu: "20m"
+    memory: "32Mi"
+  limits:
+    cpu: "200m"
+    memory: "256Mi"
+
+configData: {}
+secretData: {}
+envFromConfig: false
+envFromSecret: false

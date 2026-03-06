@@ -1,0 +1,47 @@
+# ── Generic tdg-service Helm values ──────────────────────────────────────────
+# Defaults — override per environment in environments/<env>/<service>.values.yaml
+
+service:
+  name: ""          # Required: e.g., backend, frontend
+  image: ""         # Required: e.g., karandh/devlog-backend:latest
+  replicas: 1
+  port: 5000        # Container port
+  type: ClusterIP
+  nodePort: null    # Set when type is NodePort
+
+ingress:
+  enabled: false
+  host: ""          # e.g., api.devlog.local
+  className: "traefik"
+
+hpa:
+  enabled: false
+  minReplicas: 1
+  maxReplicas: 5
+  cpuThreshold: 70
+
+resources:
+  requests:
+    cpu: "50m"
+    memory: "64Mi"
+  limits:
+    cpu: "500m"
+    memory: "512Mi"
+
+# Environment variables mounted as a ConfigMap
+# Keys here become env vars in the container
+configData: {}
+#   NODE_ENV: production
+#   PORT: "5000"
+
+# Environment variables mounted as a Secret (values must be base64-encoded)
+# Keys here become env vars in the container
+secretData: {}
+#   MONGODB_URI: <base64-encoded>
+#   JWT_SECRET: <base64-encoded>
+
+envFromConfig: true
+envFromSecret: true
+
+networkPolicy:
+  enabled: false

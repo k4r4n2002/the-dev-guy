@@ -1,0 +1,124 @@
+/* PostDetailPage.css */
+.back-link {
+    display: inline-block;
+    margin-bottom: var(--space-6);
+    color: var(--color-text-secondary);
+    font-size: var(--font-size-sm);
+    transition: color var(--transition-fast);
+}
+
+.back-link:hover {
+    color: var(--color-brand);
+}
+
+.post-detail {
+    background: var(--color-bg-secondary);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    padding: var(--space-8);
+    margin-bottom: var(--space-8);
+}
+
+.post-detail-meta {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    margin-bottom: var(--space-6);
+    flex-wrap: wrap;
+}
+
+.post-detail-author {
+    display: block;
+    font-weight: 600;
+    font-size: var(--font-size-sm);
+}
+
+.post-detail-date {
+    display: block;
+    font-size: var(--font-size-xs);
+    color: var(--color-text-muted);
+}
+
+.post-detail-actions {
+    margin-left: auto;
+    display: flex;
+    gap: var(--space-2);
+}
+
+.post-detail-title {
+    font-size: var(--font-size-3xl);
+    font-weight: 700;
+    line-height: 1.2;
+    margin-bottom: var(--space-4);
+}
+
+.post-detail-tags {
+    display: flex;
+    gap: var(--space-2);
+    flex-wrap: wrap;
+    margin-bottom: var(--space-6);
+}
+
+.post-detail-content {
+    color: var(--color-text-secondary);
+    line-height: 1.8;
+    white-space: pre-wrap;
+    font-size: var(--font-size-base);
+    margin-bottom: var(--space-6);
+}
+
+.post-detail-footer {
+    display: flex;
+    gap: var(--space-6);
+    color: var(--color-text-muted);
+    font-size: var(--font-size-sm);
+    padding-top: var(--space-4);
+    border-top: 1px solid var(--color-border);
+}
+
+.comments-section {
+    margin-top: var(--space-8);
+}
+
+.comments-title {
+    font-size: var(--font-size-xl);
+    font-weight: 600;
+    margin-bottom: var(--space-6);
+}
+
+.comment-form {
+    margin-bottom: var(--space-6);
+}
+
+.comments-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+}
+
+.comment-item {
+    padding: var(--space-4);
+}
+
+.comment-header {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    margin-bottom: var(--space-2);
+}
+
+.comment-author {
+    font-weight: 600;
+    font-size: var(--font-size-sm);
+}
+
+.comment-date {
+    font-size: var(--font-size-xs);
+    color: var(--color-text-muted);
+}
+
+.comment-content {
+    color: var(--color-text-secondary);
+    font-size: var(--font-size-sm);
+    line-height: 1.7;
+}

@@ -1,0 +1,110 @@
+/* PostCard.css */
+.post-card {
+    cursor: pointer;
+}
+
+.post-card-link {
+    display: block;
+    text-decoration: none;
+    color: inherit;
+}
+
+.post-card-header {
+    margin-bottom: var(--space-4);
+}
+
+.post-card-author {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+}
+
+.post-card-username {
+    display: block;
+    font-size: var(--font-size-sm);
+    font-weight: 600;
+    color: var(--color-text-primary);
+}
+
+.post-card-date {
+    display: block;
+    font-size: var(--font-size-xs);
+    color: var(--color-text-muted);
+}
+
+.post-card-title {
+    font-size: var(--font-size-xl);
+    font-weight: 700;
+    color: var(--color-text-primary);
+    line-height: 1.3;
+    margin-bottom: var(--space-3);
+    transition: color var(--transition-fast);
+}
+
+.post-card:hover .post-card-title {
+    color: var(--color-brand);
+}
+
+.post-card-excerpt {
+    color: var(--color-text-secondary);
+    font-size: var(--font-size-sm);
+    line-height: 1.7;
+    margin-bottom: var(--space-4);
+}
+
+.post-card-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2);
+    margin-bottom: var(--space-4);
+}
+
+.post-card-footer {
+    display: flex;
+    align-items: center;
+    gap: var(--space-4);
+    padding-top: var(--space-4);
+    border-top: 1px solid var(--color-border);
+}
+
+.like-btn {
+    display: flex;
+    align-items: center;
+    gap: var(--space-1);
+    background: none;
+    border: none;
+    color: var(--color-text-muted);
+    font-size: var(--font-size-sm);
+    transition: all var(--transition-fast);
+    padding: var(--space-1) var(--space-2);
+    border-radius: var(--radius);
+}
+
+.like-btn:hover:not(:disabled) {
+    color: var(--color-danger);
+    background: var(--color-danger-subtle);
+}
+
+.like-btn.liked {
+    color: var(--color-danger);
+}
+
+.like-icon {
+    font-size: 1rem;
+}
+
+.comment-count {
+    font-size: var(--font-size-sm);
+    color: var(--color-text-muted);
+}
+
+.read-more {
+    margin-left: auto;
+    font-size: var(--font-size-sm);
+    color: var(--color-brand);
+    font-weight: 500;
+}
+
+.read-more:hover {
+    text-decoration: underline;
+}

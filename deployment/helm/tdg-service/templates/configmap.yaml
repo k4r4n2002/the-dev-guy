@@ -1,0 +1,13 @@
+{{- if .Values.envFromConfig }}
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ include "tdg-service.name" . }}-config
+  namespace: {{ .Release.Namespace }}
+  labels:
+    {{- include "tdg-service.labels" . | nindent 4 }}
+data:
+  {{- range $key, $val := .Values.configData }}
+  {{ $key }}: {{ $val | quote }}
+  {{- end }}
+{{- end }}

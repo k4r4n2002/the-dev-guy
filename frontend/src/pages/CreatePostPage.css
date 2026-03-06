@@ -1,0 +1,19 @@
+/* CreatePostPage.css */
+.create-post-header {
+    margin-bottom: var(--space-8);
+}
+
+.create-post-form {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-6);
+}
+
+.char-count {
+    font-size: var(--font-size-xs);
+    color: var(--color-text-muted);
+}
+
+.char-count.warn {
+    color: var(--color-warning);
+}

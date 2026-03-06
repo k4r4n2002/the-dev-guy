@@ -1,0 +1,45 @@
+# =============================================================================
+# environments/dev/backend.values.yaml
+# Configures the DevLog backend for the dev environment.
+#
+# To encode secrets:
+#   echo -n "YOUR_MONGO_URI" | base64
+#   echo -n "YOUR_JWT_SECRET" | base64
+# =============================================================================
+
+service:
+  name: "tdg-backend"
+  image: "karandh/devlog-backend:latest"
+  replicas: 1
+  port: 5000
+  type: NodePort
+  nodePort: 30050
+
+ingress:
+  enabled: false
+
+hpa:
+  enabled: false
+
+resources:
+  requests:
+    cpu: "50m"
+    memory: "128Mi"
+  limits:
+    cpu: "500m"
+    memory: "512Mi"
+
+# Non-sensitive configuration (mounted via ConfigMap)
+configData:
+  NODE_ENV: "development"
+  PORT: "5000"
+  CORS_ORIGINS: "http://localhost:5173,http://localhost:30080"
+  JWT_EXPIRES_IN: "7d"
+
+# Sensitive credentials (mounted via Secret — values must be base64 encoded!)
+# Replace these with your actual base64-encoded values:
+#   echo -n "mongodb+srv://..." | base64
+#   echo -n "my-jwt-secret" | base64
+secretData:
+  MONGODB_URI: "bW9uZ29kYitzcnY6Ly88dXNlcj46PHBhc3N3b3JkPkBjbHVzdGVyMC54eHh4eC5tb25nb2RiLm5ldC9kZXZsb2c/cmV0cnlXcml0ZXM9dHJ1ZSZ3PW1ham9yaXR5"
+  JWT_SECRET: "Y2hhbmdlLW1lLXRvLWEtbG9uZy1yYW5kb20tc3RyaW5n"

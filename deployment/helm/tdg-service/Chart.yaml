@@ -1,0 +1,6 @@
+apiVersion: v2
+name: tdg-service
+description: The Dev Guy — Generic service chart that deploys backend or frontend
+type: application
+version: 1.0.0
+appVersion: "1.0"

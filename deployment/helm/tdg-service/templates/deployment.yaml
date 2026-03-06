@@ -1,0 +1,48 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "tdg-service.name" . }}
+  namespace: {{ .Release.Namespace }}
+  labels:
+    {{- include "tdg-service.labels" . | nindent 4 }}
+spec:
+  replicas: {{ .Values.service.replicas }}
+  selector:
+    matchLabels:
+      {{- include "tdg-service.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      labels:
+        {{- include "tdg-service.selectorLabels" . | nindent 8 }}
+    spec:
+      containers:
+        - name: {{ include "tdg-service.name" . }}
+          image: {{ .Values.service.image }}
+          imagePullPolicy: Always
+          ports:
+            - containerPort: {{ .Values.service.port }}
+          resources:
+            {{- toYaml .Values.resources | nindent 12 }}
+          {{- if or .Values.envFromConfig .Values.envFromSecret }}
+          envFrom:
+            {{- if .Values.envFromConfig }}
+            - configMapRef:
+                name: {{ include "tdg-service.name" . }}-config
+            {{- end }}
+            {{- if .Values.envFromSecret }}
+            - secretRef:
+                name: {{ include "tdg-service.name" . }}-secret
+            {{- end }}
+          {{- end }}
+          livenessProbe:
+            httpGet:
+              path: /api/health
+              port: {{ .Values.service.port }}
+            initialDelaySeconds: 15
+            periodSeconds: 20
+          readinessProbe:
+            httpGet:
+              path: /api/health
+              port: {{ .Values.service.port }}
+            initialDelaySeconds: 5
+            periodSeconds: 10

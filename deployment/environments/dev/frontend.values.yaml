@@ -1,0 +1,32 @@
+# =============================================================================
+# environments/dev/frontend.values.yaml
+# Configures the DevLog frontend (nginx serving static files) for dev.
+# =============================================================================
+
+service:
+  name: "tdg-frontend"
+  image: "karandh/devlog-frontend:latest"
+  replicas: 1
+  port: 80
+  type: NodePort
+  nodePort: 30080
+
+ingress:
+  enabled: false
+
+hpa:
+  enabled: false
+
+resources:
+  requests:
+    cpu: "10m"
+    memory: "32Mi"
+  limits:
+    cpu: "100m"
+    memory: "128Mi"
+
+# No secrets needed for the static frontend
+configData: {}
+secretData: {}
+envFromConfig: false
+envFromSecret: false

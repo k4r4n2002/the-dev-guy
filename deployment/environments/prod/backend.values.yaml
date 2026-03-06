@@ -1,0 +1,41 @@
+# =============================================================================
+# environments/prod/backend.values.yaml
+# Production configuration — HPA enabled, ClusterIP, Traefik ingress
+# =============================================================================
+
+service:
+  name: "tdg-backend"
+  image: "karandh/devlog-backend:latest"
+  replicas: 2
+  port: 5000
+  type: ClusterIP
+
+ingress:
+  enabled: true
+  host: "api.devlog.local"
+  className: "traefik"
+
+hpa:
+  enabled: true
+  minReplicas: 2
+  maxReplicas: 8
+  cpuThreshold: 70
+
+resources:
+  requests:
+    cpu: "100m"
+    memory: "256Mi"
+  limits:
+    cpu: "1000m"
+    memory: "1Gi"
+
+configData:
+  NODE_ENV: "production"
+  PORT: "5000"
+  CORS_ORIGINS: "https://devlog.local"
+  JWT_EXPIRES_IN: "1d"
+
+# IMPORTANT: replace these with your real base64-encoded production secrets!
+secretData:
+  MONGODB_URI: "<base64-encoded-production-mongodb-uri>"
+  JWT_SECRET: "<base64-encoded-production-jwt-secret>"
